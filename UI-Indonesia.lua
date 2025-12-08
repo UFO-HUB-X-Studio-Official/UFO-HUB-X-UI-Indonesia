@@ -4301,7 +4301,7 @@ registerRight("Server", function(scroll)
         end
     end
 
-    local inputRow = makeRow("SID_Input", "“Kode Server ", 2001)
+    local inputRow = makeRow("SID_Input", "Kode Server ", 2001)
     local inputBox = inputRow:FindFirstChildWhichIsA("Frame") and inputRow:FindFirstChildWhichIsA("Frame"):FindFirstChildOfClass("TextBox")
     if not inputBox then
         inputBox = makeRightInput(inputRow, "Misalnya: JobId, tautan VIP, atau tautan roblox://…")
@@ -5307,7 +5307,7 @@ do
             pct.Text = progress .. "%"
             RunS.Heartbeat:Wait()
         end
-        msg1.Text = "Berhasil dimuat."
+        msg1.Text = "Berhasil dimuat"
         task.wait(0.25)
         local out1 = tween(box1, 0.32, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut,
             {Position = UDim2.new(1, -EDGE_RIGHT_PAD, 1, -(EDGE_BOTTOM_PAD - 24))})
@@ -5318,7 +5318,7 @@ do
         local box2 = buildBox(gui2)
         buildLogo(box2, LOGO_STEP2)
         buildTitle(box2)
-        buildMsg(box2, "Unduhan UI selesai. ✅")
+        buildMsg(box2, "Unduhan UI selesai ✅")
         tween(box2, 0.22, Enum.EasingStyle.Quart, Enum.EasingDirection.Out,
             {Position = UDim2.new(1, -EDGE_RIGHT_PAD, 1, -EDGE_BOTTOM_PAD)}):Play()
 
