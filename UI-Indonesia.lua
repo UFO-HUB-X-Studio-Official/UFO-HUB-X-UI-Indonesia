@@ -4326,22 +4326,22 @@ registerRight("Server", function(scroll)
                 ok, msg = pcall(function() TeleportService:TeleportToPlaceInstance(target.placeId, target.jobId, lp) end)
             end
             if not ok then
-                QuickToast("ย้าย เซิร์ฟเวอร์ ไม่สำเร็จ ❌: "..tostring(msg))
+                QuickToast("“Gagal pindah server ❌: "..tostring(msg))
             else
-                local tip = (target.mode=="private") and ("รหัสส่วนตัว: "..string.sub(target.code,1,6).."…")
-                                                   or  ("รหัสเซิร์ฟเวอร์เฉพาะ (JobId): "..string.sub(target.jobId,1,8).."…")
-                QuickToast("กำลังย้าย เซิร์ฟเวอร์…  "..tip)
+                local tip = (target.mode=="private") and ("“Kode pribadi.: "..string.sub(target.code,1,6).."…")
+                                                   or  ("Kode server khusus (JobId).: "..string.sub(target.jobId,1,8).."…")
+                QuickToast("Sedang pindah server…  "..tip)
             end
         end)
     end
 
-    local copyRow = makeRow("SID_Copy", "คัดลอกรหัสเซิร์ฟเวอร์ปัจจุบัน", 2003)
+    local copyRow = makeRow("SID_Copy", "Salin kode server saat ini.", 2003)
     if not copyRow:FindFirstChildOfClass("TextButton") then
-        local copyBtn = makeActionButton(copyRow, "คัดลอก รหัส")
+        local copyBtn = makeActionButton(copyRow, "“Salin kode.")
         copyBtn.MouseButton1Click:Connect(function()
             local id = tostring(game.JobId or "")
             local ok = pcall(function() setclipboard(id) end)
-            if ok then QuickToast("คัดลอก รหัส เซิร์ฟเวอร์ แล้ว ✅") else QuickToast("รหัสเซิร์ฟเวอร์ปัจจุบัน: "..id) end
+            if ok then QuickToast("Kode server sudah disalin. ✅") else QuickToast("Kode server saat ini: "..id) end
             if inputBox and id~="" then inputBox.Text = id end
         end)
     end
@@ -4425,7 +4425,7 @@ registerRight("Settings", function(scroll)
     local head = scroll:FindFirstChild("A1_Header") or Instance.new("TextLabel", scroll)
     head.Name="A1_Header"; head.BackgroundTransparency=1; head.Size=UDim2.new(1,0,0,36)
     head.Font=Enum.Font.GothamBold; head.TextSize=16; head.TextColor3=THEME.TEXT
-    head.TextXAlignment=Enum.TextXAlignment.Left; head.Text="》》》ตั้งค่าความลื่น 🚀《《《"; head.LayoutOrder = 10
+    head.TextXAlignment=Enum.TextXAlignment.Left; head.Text="》》》Atur kelancaran. 🚀《《《"; head.LayoutOrder = 10
 
     -- Remove any old rows
     for _,n in ipairs({"A1_Reduce","A1_Remove","A1_Plastic"}) do local old=scroll:FindFirstChild(n); if old then old:Destroy() end end
@@ -4526,7 +4526,7 @@ registerRight("Settings", function(scroll)
     -- ===== 3 switches (fixed orders 11/12/13) + SAVE =====
     local set50, set100, setPl
 
-    set50  = makeRow("A1_Reduce", "ลดเอฟเฟกต์ 50%", 11, function(v)
+    set50  = makeRow("A1_Reduce", "Kurangi efek 50%.", 11, function(v)
         if v then
             S.mode=1; applyHalf()
             if set100 then set100(false) end
@@ -4536,7 +4536,7 @@ registerRight("Settings", function(scroll)
         setSave("Settings.Smoother.Mode", S.mode)
     end)
 
-    set100 = makeRow("A1_Remove", "ลบเอฟเฟกต์ทั้งหมด 100%", 12, function(v)
+    set100 = makeRow("A1_Remove", "Hapus semua efek 100%.", 12, function(v)
         if v then
             S.mode=2; applyOff()
             if set50 then set50(false) end
@@ -4546,7 +4546,7 @@ registerRight("Settings", function(scroll)
         setSave("Settings.Smoother.Mode", S.mode)
     end)
 
-    setPl   = makeRow("A1_Plastic","เปลี่ยนแมพ เป็นดินน้ำมัน)", 13, function(v)
+    setPl   = makeRow("A1_Plastic","Ubah map menjadi tanah liat.", 13, function(v)
         S.plastic=v; plasticMode(v)
         setSave("Settings.Smoother.Plastic", v)
     end)
@@ -5000,7 +5000,7 @@ registerRight("Settings", function(scroll)
     header.TextSize = 16
     header.TextColor3 = THEME.TEXT
     header.TextXAlignment = Enum.TextXAlignment.Left
-    header.Text = "》》》เอเอฟเค 💤《《《"
+    header.Text = "》》》AFK. 💤《《《"
     header.LayoutOrder = nextOrder
 
     -- Row helper (เหมือนโค้ดเดิม)
@@ -5060,7 +5060,7 @@ registerRight("Settings", function(scroll)
     end
 
     -- ===== Rows + bindings (ใช้ STATE เดิม + SAVE + CORE) =====
-    local setBlack = makeRow("หน้าจอดำ (โหมดประหยัดระหว่าง เอเอฟเค)", S.blackOn, function(v)
+    local setBlack = makeRow("Layar hitam (mode hemat saat AFK).", S.blackOn, function(v)
         S.blackOn = v
         if v then S.whiteOn = false end
         syncOverlays()
@@ -5070,7 +5070,7 @@ registerRight("Settings", function(scroll)
         end
     end)
 
-    local setWhite = makeRow("หน้าจอขาว (โหมดประหยัดระหว่าง เอเอฟเค)", S.whiteOn, function(v)
+    local setWhite = makeRow("Layar putih (mode hemat saat AFK).", S.whiteOn, function(v)
         S.whiteOn = v
         if v then S.blackOn = false end
         syncOverlays()
@@ -5080,7 +5080,7 @@ registerRight("Settings", function(scroll)
         end
     end)
 
-    local setAnti  = makeRow("กันเตะตอน เอเอฟเค (20 นาที)", S.antiIdleOn, function(v)
+    local setAnti  = makeRow("Anti-kick saat AFK (20 menit).", S.antiIdleOn, function(v)
         S.antiIdleOn = v
         setSave("Settings.AFK.AntiKick", v)
         if v then
@@ -5088,7 +5088,7 @@ registerRight("Settings", function(scroll)
         end
     end)
 
-    local setWatch = makeRow("ตัวเฝ้ากิจกรรม (5 นาที → เปิดใช้งานข้อ 3)", S.watcherOn, function(v)
+    local setWatch = makeRow("Penjaga aktivitas (5 menit → mengaktifkan poin 3).", S.watcherOn, function(v)
         S.watcherOn = v
         setSave("Settings.AFK.Watcher", v)
         -- watcher loop จะเช็ค S.watcherOn อยู่แล้ว
@@ -5276,7 +5276,7 @@ do
     local box1 = buildBox(gui1)
     buildLogo(box1, LOGO_STEP1)
     buildTitle(box1)
-    local msg1 = buildMsg(box1, "กำลังเริ่มต้นระบบ... โปรดรอ")
+    local msg1 = buildMsg(box1, "Sedang memulai sistem... Harap tunggu.")
 
     local barWidth = TOAST_W - BAR_LEFT - BAR_RIGHT_PAD
     local track = Instance.new("Frame"); track.BackgroundColor3 = Color3.fromRGB(25,25,25); track.BorderSizePixel = 0
@@ -5307,7 +5307,7 @@ do
             pct.Text = progress .. "%"
             RunS.Heartbeat:Wait()
         end
-        msg1.Text = "โหลดสำเร็จแล้ว."
+        msg1.Text = "Berhasil dimuat."
         task.wait(0.25)
         local out1 = tween(box1, 0.32, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut,
             {Position = UDim2.new(1, -EDGE_RIGHT_PAD, 1, -(EDGE_BOTTOM_PAD - 24))})
@@ -5318,7 +5318,7 @@ do
         local box2 = buildBox(gui2)
         buildLogo(box2, LOGO_STEP2)
         buildTitle(box2)
-        buildMsg(box2, "ดาวน์โหลด UI เสร็จสมบูรณ์ ✅")
+        buildMsg(box2, "Unduhan UI selesai. ✅")
         tween(box2, 0.22, Enum.EasingStyle.Quart, Enum.EasingDirection.Out,
             {Position = UDim2.new(1, -EDGE_RIGHT_PAD, 1, -EDGE_BOTTOM_PAD)}):Play()
 
