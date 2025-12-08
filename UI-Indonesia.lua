@@ -551,9 +551,9 @@ local btnPlayer,  setPlayerActive   = makeTabButton(LeftScroll, "Pemain",  ICON_
 local btnHome,    setHomeActive     = makeTabButton(LeftScroll, "Beranda",    ICON_HOME)
 local btnQuest,   setQuestActive    = makeTabButton(LeftScroll, "Misi",   ICON_QUEST)
 local btnShop,    setShopActive     = makeTabButton(LeftScroll, "Toko",    ICON_SHOP)
-local btnUpdate,  setUpdateActive   = makeTabButton(LeftScroll, "Pembaruan",  ICON_UPDATE)
+local btnUpdate,  setUpdateActive   = makeTabButton(LeftScroll, "Update",  ICON_UPDATE)
 local btnServer,  setServerActive   = makeTabButton(LeftScroll, "Server",  ICON_SERVER)
-local btnSettings,setSettingsActive = makeTabButton(LeftScroll, "Pengaturan",ICON_SETTINGS)
+local btnSettings,setSettingsActive = makeTabButton(LeftScroll, "Setelan",ICON_SETTINGS)
 
 -- ========== RIGHT ==========
 local RightShell=Instance.new("Frame",Body)
@@ -4301,7 +4301,7 @@ registerRight("Server", function(scroll)
         end
     end
 
-    local inputRow = makeRow("SID_Input", "Kolom Masukan Kode Server ", 2001)
+    local inputRow = makeRow("SID_Input", "Input Server Code ", 2001)
     local inputBox = inputRow:FindFirstChildWhichIsA("Frame") and inputRow:FindFirstChildWhichIsA("Frame"):FindFirstChildOfClass("TextBox")
     if not inputBox then
         inputBox = makeRightInput(inputRow, "Misalnya: JobId, tautan VIP, atau tautan roblox://…")
