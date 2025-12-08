@@ -4068,7 +4068,7 @@ registerRight("Server", function(scroll)
     local busy=false
     local function setBusy(v)
         busy=v
-        btn.Text = v and "Sedang memindahkan server ..." or "Ganti Server"
+        btn.Text = v and "Pindah server…" or "Ganti Server"
         local st = btnWrap:FindFirstChildOfClass("UIStroke")
         if st then st.Color = v and THEME.GREY or THEME.GREEN end
     end
@@ -4297,11 +4297,11 @@ registerRight("Server", function(scroll)
             local jobId = deep_job or plain_job
             return { mode="public", placeId = tonumber(deep_place) or game.PlaceId, jobId = jobId }
         else
-            return nil, "Data tidak valid. Silakan tempel JobId atau tautan VIP (privateServerLinkCode).=...), or a roblox:// link."
+            return nil, "Data tidak valid. Silakan tempel JobId atau tautan VIP (privateServerLinkCode)=...), or a roblox:// link."
         end
     end
 
-    local inputRow = makeRow("SID_Input", "Input Server Code ", 2001)
+    local inputRow = makeRow("SID_Input", "“Kode Server ", 2001)
     local inputBox = inputRow:FindFirstChildWhichIsA("Frame") and inputRow:FindFirstChildWhichIsA("Frame"):FindFirstChildOfClass("TextBox")
     if not inputBox then
         inputBox = makeRightInput(inputRow, "Misalnya: JobId, tautan VIP, atau tautan roblox://…")
@@ -4328,20 +4328,20 @@ registerRight("Server", function(scroll)
             if not ok then
                 QuickToast("“Gagal pindah server ❌: "..tostring(msg))
             else
-                local tip = (target.mode=="private") and ("“Kode pribadi.: "..string.sub(target.code,1,6).."…")
-                                                   or  ("Kode server khusus (JobId).: "..string.sub(target.jobId,1,8).."…")
+                local tip = (target.mode=="private") and ("“Kode pribadi: "..string.sub(target.code,1,6).."…")
+                                                   or  ("Kode server khusus (JobId): "..string.sub(target.jobId,1,8).."…")
                 QuickToast("Sedang pindah server…  "..tip)
             end
         end)
     end
 
-    local copyRow = makeRow("SID_Copy", "Salin kode server saat ini.", 2003)
+    local copyRow = makeRow("SID_Copy", "Salin kode server saat ini", 2003)
     if not copyRow:FindFirstChildOfClass("TextButton") then
-        local copyBtn = makeActionButton(copyRow, "“Salin kode.")
+        local copyBtn = makeActionButton(copyRow, "Salin kode")
         copyBtn.MouseButton1Click:Connect(function()
             local id = tostring(game.JobId or "")
             local ok = pcall(function() setclipboard(id) end)
-            if ok then QuickToast("Kode server sudah disalin. ✅") else QuickToast("Kode server saat ini: "..id) end
+            if ok then QuickToast("Kode server sudah disalin ✅") else QuickToast("Kode server saat ini: "..id) end
             if inputBox and id~="" then inputBox.Text = id end
         end)
     end
@@ -4526,7 +4526,7 @@ registerRight("Settings", function(scroll)
     -- ===== 3 switches (fixed orders 11/12/13) + SAVE =====
     local set50, set100, setPl
 
-    set50  = makeRow("A1_Reduce", "Kurangi efek 50%.", 11, function(v)
+    set50  = makeRow("A1_Reduce", "Kurangi efek 50%", 11, function(v)
         if v then
             S.mode=1; applyHalf()
             if set100 then set100(false) end
@@ -4536,7 +4536,7 @@ registerRight("Settings", function(scroll)
         setSave("Settings.Smoother.Mode", S.mode)
     end)
 
-    set100 = makeRow("A1_Remove", "Hapus semua efek 100%.", 12, function(v)
+    set100 = makeRow("A1_Remove", "Hapus semua efek 100%", 12, function(v)
         if v then
             S.mode=2; applyOff()
             if set50 then set50(false) end
@@ -4546,7 +4546,7 @@ registerRight("Settings", function(scroll)
         setSave("Settings.Smoother.Mode", S.mode)
     end)
 
-    setPl   = makeRow("A1_Plastic","Ubah map menjadi tanah liat.", 13, function(v)
+    setPl   = makeRow("A1_Plastic","Ubah map menjadi tanah liat", 13, function(v)
         S.plastic=v; plasticMode(v)
         setSave("Settings.Smoother.Plastic", v)
     end)
@@ -5060,7 +5060,7 @@ registerRight("Settings", function(scroll)
     end
 
     -- ===== Rows + bindings (ใช้ STATE เดิม + SAVE + CORE) =====
-    local setBlack = makeRow("Layar hitam (mode hemat saat AFK).", S.blackOn, function(v)
+    local setBlack = makeRow("Layar hitam (mode hemat saat AFK)", S.blackOn, function(v)
         S.blackOn = v
         if v then S.whiteOn = false end
         syncOverlays()
@@ -5070,7 +5070,7 @@ registerRight("Settings", function(scroll)
         end
     end)
 
-    local setWhite = makeRow("Layar putih (mode hemat saat AFK).", S.whiteOn, function(v)
+    local setWhite = makeRow("Layar putih (mode hemat saat AFK)", S.whiteOn, function(v)
         S.whiteOn = v
         if v then S.blackOn = false end
         syncOverlays()
@@ -5080,7 +5080,7 @@ registerRight("Settings", function(scroll)
         end
     end)
 
-    local setAnti  = makeRow("Anti-kick saat AFK (20 menit).", S.antiIdleOn, function(v)
+    local setAnti  = makeRow("Anti-kick saat AFK (20 menit)", S.antiIdleOn, function(v)
         S.antiIdleOn = v
         setSave("Settings.AFK.AntiKick", v)
         if v then
@@ -5088,7 +5088,7 @@ registerRight("Settings", function(scroll)
         end
     end)
 
-    local setWatch = makeRow("Penjaga aktivitas (5 menit → mengaktifkan poin 3).", S.watcherOn, function(v)
+    local setWatch = makeRow("Penjaga aktivitas (5 menit → mengaktifkan poin 3)", S.watcherOn, function(v)
         S.watcherOn = v
         setSave("Settings.AFK.Watcher", v)
         -- watcher loop จะเช็ค S.watcherOn อยู่แล้ว
